@@ -4,4 +4,7 @@
 	<select id="getstaff" resultType="app.StaffVO">
 		select * from staff  
 	</select>
+	<select id="stafflogin" resultType="app.StaffVO">
+		select * from staff where staff_id = #{id} and pw = #{pw}   
+	</select>
 </mapper>
