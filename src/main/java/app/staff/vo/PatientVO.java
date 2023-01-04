@@ -1,4 +1,4 @@
-package app;
+package app.staff.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
