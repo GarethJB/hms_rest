@@ -17,7 +17,7 @@ public class AppReceptionServiceImpl implements AppReceptionService {
 	@Override
 	public StaffVO login_staff(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.login_staff(map);
 	}
 
 	@Override

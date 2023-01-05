@@ -20,7 +20,7 @@ public class AppReceptionDAO implements AppReceptionService {
 	@Override
 	public StaffVO login_staff(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		return null;
+		return sql.selectOne("re.login", map);
 	}
 
 	@Override
