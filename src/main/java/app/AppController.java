@@ -9,6 +9,7 @@ public class AppController {
 	
 	@RequestMapping(value = "/test.ap")
 	public String appTest() {
+
 		return "appTest";
 	}
 	
