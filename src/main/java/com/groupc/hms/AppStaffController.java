@@ -16,15 +16,36 @@ public class AppStaffController {
 	@Autowired private AppStaffServiceImpl service;
 
 	@RequestMapping(value = "/getstaff.ap", produces = "text/html; charset=UTF-8")
-	public String appTest() {
+	public String getStaff() {
 		return new Gson().toJson(service.get_stafflist());
 	}
 
 	@RequestMapping(value = "/stafflogin.ap", produces = "text/html; charset=UTF-8")
 	public String staffLogin(String id, String pw) {
-		HashMap<String, String> loginMap = new HashMap<>();
-		loginMap.put("id", id);
-		loginMap.put("pw", pw);
-		return new Gson().toJson(service.login_staff(loginMap));
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("pw", pw);
+		return new Gson().toJson(service.login_staff(map));
+	}
+	
+	@RequestMapping(value = "/searchpatient.ap", produces = "text/html; charset=UTF-8")
+	public String searchPatient(String name) {
+		return new Gson().toJson(service.search_patient(name));
+	}
+	
+	@RequestMapping(value = "/updatepatientmemo.ap", produces = "text/html; charset=UTF-8")
+	public String updatePatientMemo(String id, String memo) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("memo", memo);
+		return String.valueOf(service.update_patient_memo(map));
+	}
+	
+	@RequestMapping(value = "/getmedicalreceipt.ap", produces = "text/html; charset=UTF-8")
+	public String getMedicalRecipt(String id, String time) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("time", time);
+		return new Gson().toJson(service.get_medical_receiptlist(map));
 	}
 }

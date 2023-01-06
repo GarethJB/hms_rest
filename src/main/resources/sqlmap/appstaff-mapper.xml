@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="staff">
+	<select id="get_staff" resultType="app.staff.vo.StaffVO">
+		select d.department_name, s.* from staff s, department d where s.department_id = d.department_id 
+	</select>
+	<select id="login_staff" resultType="app.staff.vo.StaffVO">
+		select * from staff where staff_id = #{id} and pw = #{pw}   
+	</select>
+	<select id="search_patient" resultType="app.staff.vo.PatientVO">
+		select * from patient where name = #{name} 
+	</select>
+	<update id="update_patient_memo">
+		update patient set memo = #{memo} where patient_id = #{id} 
+	</update>
+	<select id="get_medical_receipt" resultType="app.staff.vo.MedicalReceiptVO">
+		select p.name as patient_name, s.name as staff_name, to_char(mr.time, 'yyyy-mm-dd hh24:mi:ss') as time, mr.memo 
+		from patient p, staff s, medical_receipt mr 
+		where p.patient_id = mr.patient_id 
+		and s.staff_id = mr.staff_id 
+		and to_char(mr.time, 'yyyy-mm-dd') = #{time} 
+		and mr.staff_id = #{id} 
+		order by mr.time 
+	</select>
+</mapper>
