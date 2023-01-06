@@ -15,8 +15,6 @@ import app.staff.vo.StaffVO;
 @RestController
 public class AppController {
 	
-
-	
 	@RequestMapping(value = "/test.ap")
 	public String appTest() {
 
