@@ -48,4 +48,21 @@ public class AppStaffController {
 		map.put("time", time);
 		return new Gson().toJson(service.get_medical_receiptlist(map));
 	}
+	
+	@RequestMapping(value = "/getmedicalrecord.ap", produces = "text/html; charset=UTF-8")
+	public String getMedicalRecord(String id, String patient_name, String first_date, String second_date, String option) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("patient_name", patient_name);
+		map.put("first_date", first_date);
+		map.put("second_date", second_date);
+		map.put("option", option);
+		return new Gson().toJson(service.get_medical_recordlist(map));
+	}
+	
+	@RequestMapping(value = "/getprescription.ap", produces = "text/html; charset=UTF-8")
+	public String getPrescription(String id) {
+		return new Gson().toJson(service.get_prescription(id));
+	}
+	
 }

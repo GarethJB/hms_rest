@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.staff.vo.MedicalReceiptVO;
+import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
+import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
 
 @Service
@@ -38,6 +40,16 @@ public class AppStaffServiceImpl implements AppStaffService {
 	@Override
 	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
 		return dao.get_medical_receiptlist(map);
+	}
+
+	@Override
+	public List<MedicalRecordVO> get_medical_recordlist(Map<String, String> map) {
+		return dao.get_medical_recordlist(map);
+	}
+
+	@Override
+	public PrescriptionVO get_prescription(String id) {
+		return dao.get_prescription(id);
 	}
 	
 

@@ -7,7 +7,7 @@
 	<select id="login_staff" resultType="app.staff.vo.StaffVO">
 		select * from staff where staff_id = #{id} and pw = #{pw}   
 	</select>
-	<select id="search_patient" resultType="app.staff.vo.PatientVO">
+	<select id="get_patient" resultType="app.staff.vo.PatientVO">
 		select * from patient where name = #{name} 
 	</select>
 	<update id="update_patient_memo">
@@ -21,5 +21,36 @@
 		and to_char(mr.time, 'yyyy-mm-dd') = #{time} 
 		and mr.staff_id = #{id} 
 		order by mr.time 
+	</select>
+	<select id="get_medical_record" resultType="app.staff.vo.MedicalRecordVO">
+		select mr.medical_record_id, p.name as patient_name, s.name as staff_name, 
+		to_char(mr.treatment_date, 'yyyy-mm-dd hh24:mi') as treatment_date, mr.admission, mr.treatment_name 
+		from patient p, staff s, medical_record mr 
+		where p.patient_id = mr.patient_id
+		and s.staff_id = mr.staff_id 
+		and mr.treatment_date between #{first_date} and #{second_date} 
+		<choose>
+			<when test="option == 'department'">
+				and s.staff_id in (
+				select staff_id from staff where department_id = (select department_id from staff where staff_id = #{id}) and staff_level = 1
+				) 
+			</when>
+			<when test="option == 'doctor'">
+				and s.staff_id = #{id} 
+			</when>
+		</choose>
+		<if test="patient_name != ''">
+			and p.name = #{patient_name} 
+		</if>
+		order by mr.treatment_date 
+	</select>
+	<select id="get_prescription" resultType="app.staff.vo.PrescriptionVO">
+		select p.name as patient_name, p.social_id, s.name as staff_name, 
+		s.staff_id, to_char(mr.treatment_date, 'yyyy-mm-dd hh24:mi:ss') as treatment_date, pr.prescription_record_id, pr.prescription_name 
+		from patient p, staff s, prescription_record pr, medical_record mr
+		where mr.medical_record_id = pr.medical_record_id
+		and p.patient_id = mr.patient_id 
+		and s.staff_id = mr.staff_id 
+		and mr.medical_record_id = #{id} 
 	</select>
 </mapper>

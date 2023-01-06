@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import com.google.gson.JsonElement;
 
 import app.staff.vo.MedicalReceiptVO;
+import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
+import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
 
 @Repository
@@ -23,7 +25,7 @@ public class AppStaffDAO implements AppStaffService {
 
 	@Override
 	public List<PatientVO> search_patient(String name) {
-		return sql.selectList("staff.search_patient", name);
+		return sql.selectList("staff.get_patient", name);
 	}
 
 	@Override
@@ -44,6 +46,16 @@ public class AppStaffDAO implements AppStaffService {
 	@Override
 	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
 		return sql.selectList("staff.get_medical_receipt", map);
+	}
+
+	@Override
+	public List<MedicalRecordVO> get_medical_recordlist(Map<String, String> map) {
+		return sql.selectList("staff.get_medical_record", map);
+	}
+
+	@Override
+	public PrescriptionVO get_prescription(String id) {
+		return sql.selectOne("staff.get_prescription", id);
 	}
 
 }
