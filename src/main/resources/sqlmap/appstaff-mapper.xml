@@ -5,11 +5,19 @@
 		select d.department_name, s.* from staff s, department d where s.department_id = d.department_id 
 	</select>
 	<select id="login_staff" resultType="app.staff.vo.StaffVO">
-		select * from staff where staff_id = #{id} and pw = #{pw}   
+		select s.*, d.department_name from staff s, department d
+		where s.department_id = d.department_id  
+		and staff_id = #{id} and pw = #{pw}   
 	</select>
 	<select id="get_patient" resultType="app.staff.vo.PatientVO">
 		select * from patient where name = #{name} 
 	</select>
+	<select id="get_patient_from_id" resultType="app.staff.vo.PatientVO">
+		select * from patient where patient_id = #{id}
+	</select>
+	<update id="update_staff_introduction">
+		update staff set introduction = #{introduction} where staff_id = #{id} 
+	</update>
 	<update id="update_patient_memo">
 		update patient set memo = #{memo} where patient_id = #{id} 
 	</update>
@@ -23,11 +31,13 @@
 		order by mr.time 
 	</select>
 	<select id="get_medical_record" resultType="app.staff.vo.MedicalRecordVO">
-		select mr.medical_record_id, p.name as patient_name, s.name as staff_name, 
-		to_char(mr.treatment_date, 'yyyy-mm-dd hh24:mi') as treatment_date, mr.admission, mr.treatment_name 
-		from patient p, staff s, medical_record mr 
+		select mr.medical_record_id, p.name as patient_name, s.name as staff_name, mr.memo, 
+		to_char(mr.treatment_date, 'yyyy-mm-dd hh24:mi') as treatment_date, mr.admission, 
+		mr.treatment_name, pr.prescription_record_id
+		from patient p, staff s, medical_record mr, prescription_record pr 
 		where p.patient_id = mr.patient_id
 		and s.staff_id = mr.staff_id 
+		and pr.medical_record_id(+) = mr.medical_record_id 
 		and mr.treatment_date between #{first_date} and #{second_date} 
 		<choose>
 			<when test="option == 'department'">
@@ -53,4 +63,24 @@
 		and s.staff_id = mr.staff_id 
 		and mr.medical_record_id = #{id} 
 	</select>
+		<update id="update_medical_record_memo">
+		update medical_record set memo = #{memo} where medical_record_id = #{id} 
+	</update>
+	<select id="get_admission_record_ward" resultType="app.staff.vo.AdmissionRecordVO">
+		select ar.ward_id, ar.admission_record_id, p.patient_id, p.name as patient_name, s.name as staff_name, s.staff_id,  
+		d.department_name, mr.treatment_name, to_char(ar.admission_date, 'yyyy-mm-dd') as admission_date,
+		to_char(ar.discharge_date, 'yyyy-mm-dd') as discharge_date 
+		from medical_record mr, admission_record ar, ward w, patient p, staff s, department d 
+		where mr.medical_record_id = ar.medical_record_id
+		and s.staff_id = mr.staff_id 
+		and p.patient_id = mr.patient_id
+		and w.ward_id = ar.ward_id 
+		and s.department_id = d.department_id 
+		and w.ward_id in (select ward_id from ward where ward_number = #{ward_number})
+		and (ar.discharge_date > (select sysdate from dual) or discharge_date is null)
+		order by w.ward_id 
+	</select>
+	<update id="update_discharge_date">
+		update admission_record set discharge_date = #{date} where admission_record_id = #{id} 
+	</update>
 </mapper>

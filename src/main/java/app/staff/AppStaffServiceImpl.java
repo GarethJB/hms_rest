@@ -11,6 +11,7 @@ import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
+import app.staff.vo.AdmissionRecordVO;
 
 @Service
 public class AppStaffServiceImpl implements AppStaffService {
@@ -18,8 +19,13 @@ public class AppStaffServiceImpl implements AppStaffService {
 	@Autowired private AppStaffDAO dao;
 
 	@Override
-	public List<PatientVO> search_patient(String name) {
-		return dao.search_patient(name);
+	public List<PatientVO> get_patient(String name) {
+		return dao.get_patient(name);
+	}
+	
+	@Override
+	public PatientVO get_patient_from_id(String id) {
+		return dao.get_patient_from_id(id);
 	}
 
 	@Override
@@ -30,6 +36,11 @@ public class AppStaffServiceImpl implements AppStaffService {
 	@Override
 	public List<StaffVO> get_stafflist() {
 		return dao.get_stafflist();
+	}
+	
+	@Override
+	public int update_staff_introduction(Map<String, String> map) {
+		return dao.update_staff_introduction(map);
 	}
 
 	@Override
@@ -51,6 +62,25 @@ public class AppStaffServiceImpl implements AppStaffService {
 	public PrescriptionVO get_prescription(String id) {
 		return dao.get_prescription(id);
 	}
+
+	@Override
+	public int update_medical_record_memo(Map<String, String> map) {
+		return dao.update_medical_record_memo(map);
+	}
+
+	@Override
+	public List<AdmissionRecordVO> get_admission_record_ward(String ward_number) {
+		return dao.get_admission_record_ward(ward_number);
+	}
+
+	@Override
+	public int update_discharge_date(Map<String, String> map) {
+		return dao.update_discharge_date(map);
+	}
+
+
+
+	
 	
 
 }

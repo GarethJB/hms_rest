@@ -15,6 +15,7 @@ import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
+import app.staff.vo.AdmissionRecordVO;
 
 @Repository
 public class AppStaffDAO implements AppStaffService {
@@ -24,8 +25,13 @@ public class AppStaffDAO implements AppStaffService {
 	private SqlSession sql;
 
 	@Override
-	public List<PatientVO> search_patient(String name) {
+	public List<PatientVO> get_patient(String name) {
 		return sql.selectList("staff.get_patient", name);
+	}
+	
+	@Override
+	public PatientVO get_patient_from_id(String id) {
+		return sql.selectOne("staff.get_patient_from_id", id);
 	}
 
 	@Override
@@ -36,6 +42,11 @@ public class AppStaffDAO implements AppStaffService {
 	@Override
 	public List<StaffVO> get_stafflist() {
 		return sql.selectList("staff.get_staff");
+	}
+	
+	@Override
+	public int update_staff_introduction(Map<String, String> map) {
+		return sql.update("staff.update_staff_introduction", map);
 	}
 
 	@Override
@@ -56,6 +67,21 @@ public class AppStaffDAO implements AppStaffService {
 	@Override
 	public PrescriptionVO get_prescription(String id) {
 		return sql.selectOne("staff.get_prescription", id);
+	}
+
+	@Override
+	public int update_medical_record_memo(Map<String, String> map) {
+		return sql.update("staff.update_medical_record_memo", map);
+	}
+
+	@Override
+	public List<AdmissionRecordVO> get_admission_record_ward(String ward_number) {
+		return sql.selectList("staff.get_admission_record_ward", ward_number);
+	}
+
+	@Override
+	public int update_discharge_date(Map<String, String> map) {
+		return sql.update("staff.update_discharge_date", map);
 	}
 
 }
