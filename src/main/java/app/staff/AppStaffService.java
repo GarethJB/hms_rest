@@ -3,12 +3,13 @@ package app.staff;
 import java.util.List;
 import java.util.Map;
 
+import app.staff.vo.AdmissionMemoVO;
+import app.staff.vo.AdmissionRecordVO;
 import app.staff.vo.MedicalReceiptVO;
 import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
-import app.staff.vo.AdmissionRecordVO;
 
 public interface AppStaffService {
 	
@@ -23,6 +24,10 @@ public interface AppStaffService {
 	public PrescriptionVO get_prescription(String id);
 	public int update_medical_record_memo(Map<String, String> map);
 	public List<AdmissionRecordVO> get_admission_record_ward(String ward_number);
+	public List<AdmissionRecordVO> get_admission_record_mypatient(Map<String, String> map);
 	public int update_discharge_date(Map<String, String> map);
+	public List<AdmissionMemoVO> get_admission_memo(String id);
+	public int insert_admission_memo(Map<String, String> map);
+	public int delete_admission_memo(String id);
 
 }

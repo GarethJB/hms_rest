@@ -15,6 +15,7 @@ import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
 import app.staff.vo.StaffVO;
+import app.staff.vo.AdmissionMemoVO;
 import app.staff.vo.AdmissionRecordVO;
 
 @Repository
@@ -78,10 +79,31 @@ public class AppStaffDAO implements AppStaffService {
 	public List<AdmissionRecordVO> get_admission_record_ward(String ward_number) {
 		return sql.selectList("staff.get_admission_record_ward", ward_number);
 	}
+	
+	@Override
+	public List<AdmissionRecordVO> get_admission_record_mypatient(Map<String, String> map) {
+		return sql.selectList("staff.get_admission_record_mypatient", map);
+	}
 
 	@Override
 	public int update_discharge_date(Map<String, String> map) {
 		return sql.update("staff.update_discharge_date", map);
 	}
+
+	@Override
+	public List<AdmissionMemoVO> get_admission_memo(String id) {
+		return sql.selectList("staff.get_admission_memo", id);
+	}
+
+	@Override
+	public int insert_admission_memo(Map<String, String> map) {
+		return sql.insert("staff.insert_admission_memo", map);
+	}
+
+	@Override
+	public int delete_admission_memo(String id) {
+		return sql.delete("staff.delete_admission_memo", id);
+	}
+
 
 }

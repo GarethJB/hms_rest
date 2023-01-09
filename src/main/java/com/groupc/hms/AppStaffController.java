@@ -91,6 +91,14 @@ public class AppStaffController {
 		return new Gson().toJson(service.get_admission_record_ward(ward_id));
 	}
 	
+	@RequestMapping(value = "/getAdmissionRecordMypatient.ap", produces = "text/html; charset=UTF-8")
+	public String getAdmissionRecordMypatient(String id, String option) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("option", option);
+		return new Gson().toJson(service.get_admission_record_mypatient(map));
+	}
+	
 	@RequestMapping(value = "/updateDischargeDate.ap", produces = "text/html; charset=UTF-8")
 	public String updateDischargeDate(String id, String date) {
 		HashMap<String, String> map = new HashMap<>();
@@ -98,6 +106,26 @@ public class AppStaffController {
 		map.put("date", date);
 		return String.valueOf(service.update_discharge_date(map));
 	}
+	
+	@RequestMapping(value = "/getAdmissionMemo.ap", produces = "text/html; charset=UTF-8")
+	public String getAdmissionMemo(String id) {
+		return new Gson().toJson(service.get_admission_memo(id));
+	}
+	
+	@RequestMapping(value = "/insertAdmissionMemo.ap", produces = "text/html; charset=UTF-8")
+	public String insertAdmissionMemo(String admission_record_id, String staff_id, String memo) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("admission_record_id", admission_record_id);
+		map.put("staff_id", staff_id);
+		map.put("memo", memo);
+		return String.valueOf(service.insert_admission_memo(map));
+	}
+	
+	@RequestMapping(value = "/deleteAdmissionMemo.ap", produces = "text/html; charset=UTF-8")
+	public String deleteAdmissionMemo(String admission_record_id) {
+		return String.valueOf(service.delete_admission_memo(admission_record_id));
+	}
+	
 	
 	
 	
