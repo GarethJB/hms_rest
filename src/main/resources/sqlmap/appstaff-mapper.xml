@@ -77,7 +77,7 @@
 		and w.ward_id = ar.ward_id 
 		and s.department_id = d.department_id 
 		and w.ward_id in (select ward_id from ward where ward_number = #{ward_number})
-		and (ar.discharge_date > (select sysdate from dual) or discharge_date is null)
+		and (ar.discharge_date > (select current_date from dual) or discharge_date is null)
 		order by w.ward_id 
 	</select>
 	<select id="get_admission_record_mypatient" resultType="app.staff.vo.AdmissionRecordVO">
@@ -100,7 +100,7 @@
 				and s.staff_id = #{id} 
 			</when>
 		</choose>
-		and (ar.discharge_date > (select sysdate from dual) or discharge_date is null) 
+		and (ar.discharge_date > (select current_date from dual) or discharge_date is null) 
 		order by w.ward_id 
 	</select>
 	<update id="update_discharge_date">
@@ -114,7 +114,7 @@
 		order by am.write_date 
 	</select>
 	<insert id="insert_admission_memo">
-		insert into admission_memo values (1, #{admission_record_id}, #{staff_id}, #{memo}, sysdate)
+		insert into admission_memo values (1, #{admission_record_id}, #{staff_id}, #{memo}, current_date)
 	</insert>
 	<delete id="delete_admission_memo">
 		delete from admission_memo where admission_memo_id = #{id} 
