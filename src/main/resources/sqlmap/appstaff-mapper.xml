@@ -10,7 +10,7 @@
 		and staff_id = #{id} and pw = #{pw}   
 	</select>
 	<select id="get_patient" resultType="app.staff.vo.PatientVO">
-		select * from patient where name = #{name} 
+		select * from patient where name like '%' || #{patient_name} || '%'   
 	</select>
 	<select id="get_patient_from_id" resultType="app.staff.vo.PatientVO">
 		select * from patient where patient_id = #{id}
@@ -50,7 +50,7 @@
 			</when>
 		</choose>
 		<if test="patient_name != ''">
-			and p.name = #{patient_name} 
+			and p.name like '%' || #{patient_name} || '%'  
 		</if>
 		order by mr.treatment_date 
 	</select>

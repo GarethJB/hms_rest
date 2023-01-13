@@ -126,8 +126,4 @@ public class AppStaffController {
 		return String.valueOf(service.delete_admission_memo(admission_record_id));
 	}
 	
-	
-	
-	
-	
 }
