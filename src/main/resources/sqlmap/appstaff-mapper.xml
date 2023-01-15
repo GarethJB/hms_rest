@@ -119,4 +119,48 @@
 	<delete id="delete_admission_memo">
 		delete from admission_memo where admission_memo_id = #{id} 
 	</delete>
+	<select id="get_schedule" resultType="app.staff.vo.ScheduleVO">
+		<choose>
+			<when test="staff_level == 1">
+				select schedule_id, staff_id, content, to_char(time, 'hh24:mi') as time 
+			    from doctor_schedule where staff_id = #{id} and to_char(time, 'yyyy-mm-dd') = #{date} 
+			    order by time 
+			</when>
+			<when test="staff_level == 2">
+				select schedule_id, staff_id, content, complete, to_char(time, 'hh24:mi') as time 
+				from nurse_schedule where staff_id = #{id} and to_char(time, 'yyyy-mm-dd') = #{date}
+				order by time  
+			</when>
+		</choose>
+	</select>
+	<insert id="insert_schedule">
+		<choose>
+			<when test="staff_level == 1">
+				insert into doctor_schedule values (1, #{id}, #{content}, to_date(#{date}, 'yyyy-mm-dd hh24:mi')) 
+			</when>
+			<when test="staff_level == 2">
+				insert into nurse_schedule values (1, #{id}, #{content}, 'N', to_date(#{date}, 'yyyy-mm-dd hh24:mi')) 
+			</when>
+		</choose>
+	</insert>
+	<delete id="delete_schedule">
+		<choose>
+			<when test="staff_level == 1">
+				delete from doctor_schedule where schedule_id = #{id} 
+			</when>
+			<when test="staff_level == 2">
+				delete from nurse_schedule where schedule_id = #{id} 
+			</when>
+		</choose>
+	</delete>
+	<update id="update_schedule">
+		<choose>
+			<when test="staff_level == 1">
+				update doctor_schedule set time = to_date(#{date}, 'yyyy-mm-dd hh24:mi'), content = #{content} where schedule_id = #{id} 
+			</when>
+			<when test="staff_level == 2">
+				update nurse_schedule set time = to_date(#{date}, 'yyyy-mm-dd hh24:mi'), content = #{content} where schedule_id = #{id} 
+			</when>
+		</choose>
+	</update>
 </mapper>

@@ -126,4 +126,42 @@ public class AppStaffController {
 		return String.valueOf(service.delete_admission_memo(admission_record_id));
 	}
 	
+	@RequestMapping(value = "/getSchedule.ap", produces = "text/html; charset=UTF-8")
+	public String getSchedule(String id, String staff_level, String date) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("staff_level", staff_level);
+		map.put("date", date);
+		return new Gson().toJson(service.get_schedule(map));
+	}
+	
+	@RequestMapping(value = "/insertSchedule.ap", produces = "text/html; charset=UTF-8")
+	public String getSchedule(String id, String staff_level, String date, String content) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("staff_level", staff_level);
+		map.put("date", date);
+		map.put("content", content);
+		return String.valueOf(service.insert_schedule(map));
+	}
+	
+	@RequestMapping(value = "/deleteSchedule.ap", produces = "text/html; charset=UTF-8")
+	public String deleteSchedule(String id, String staff_level) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("staff_level", staff_level);
+		return String.valueOf(service.delete_schedule(map));
+	}
+	
+	@RequestMapping(value = "/updateSchedule.ap", produces = "text/html; charset=UTF-8")
+	public String updateSchedule(String id, String staff_level, String date, String content) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("staff_level", staff_level);
+		map.put("date", date);
+		map.put("content", content);
+		return String.valueOf(service.update_schedule(map));
+	}
+	
+	
 }

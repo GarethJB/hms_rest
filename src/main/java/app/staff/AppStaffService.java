@@ -9,6 +9,7 @@ import app.staff.vo.MedicalReceiptVO;
 import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
+import app.staff.vo.ScheduleVO;
 import app.staff.vo.StaffVO;
 
 public interface AppStaffService {
@@ -29,5 +30,9 @@ public interface AppStaffService {
 	public List<AdmissionMemoVO> get_admission_memo(String id);
 	public int insert_admission_memo(Map<String, String> map);
 	public int delete_admission_memo(String id);
+	public List<ScheduleVO> get_schedule(Map<String, String> map);
+	public int insert_schedule(Map<String, String> map);
+	public int delete_schedule(Map<String, String> map);
+	public int update_schedule(Map<String, String> map);
 
 }

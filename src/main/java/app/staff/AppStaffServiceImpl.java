@@ -10,6 +10,7 @@ import app.staff.vo.MedicalReceiptVO;
 import app.staff.vo.MedicalRecordVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.PrescriptionVO;
+import app.staff.vo.ScheduleVO;
 import app.staff.vo.StaffVO;
 import app.staff.vo.AdmissionMemoVO;
 import app.staff.vo.AdmissionRecordVO;
@@ -98,5 +99,26 @@ public class AppStaffServiceImpl implements AppStaffService {
 	public int delete_admission_memo(String id) {
 		return dao.delete_admission_memo(id);
 	}
+
+	@Override
+	public List<ScheduleVO> get_schedule(Map<String, String> map) {
+		return dao.get_schedule(map);
+	}
+
+	@Override
+	public int insert_schedule(Map<String, String> map) {
+		return dao.insert_schedule(map);
+	}
+
+	@Override
+	public int delete_schedule(Map<String, String> map) {
+		return dao.delete_schedule(map);
+	}
+
+	@Override
+	public int update_schedule(Map<String, String> map) {
+		return dao.update_schedule(map);
+	}
+
 
 }
