@@ -1,4 +1,4 @@
-package app;
+package com.groupc.hms;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

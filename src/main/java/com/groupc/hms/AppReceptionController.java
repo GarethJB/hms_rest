@@ -1,4 +1,4 @@
-package app;
+package com.groupc.hms;
 
 import java.util.HashMap;
 import java.util.List;
