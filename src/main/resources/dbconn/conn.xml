@@ -10,7 +10,7 @@
 		location="classpath:dbconn/db.properties"/>
 
 	<!-- DBCP객체빈 생성 -->
-	<bean id="cteam_dbcp" class="org.apache.commons.dbcp2.BasicDataSource">
+	<bean id="cteam_dbcp" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${oracleDriver}"/>
 		<property name="url" value="${cteam}"/>
 		<property name="username" value="${cteam.username}"/>

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class PatientVO {
 	
     private int patient_id, height, weight;
