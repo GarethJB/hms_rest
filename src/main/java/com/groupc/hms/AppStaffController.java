@@ -41,11 +41,11 @@ public class AppStaffController {
 		return String.valueOf(service.update_patient_memo(map));
 	}
 	
-	@RequestMapping(value = "/getmedicalreceipt.ap", produces = "text/html; charset=UTF-8")
-	public String getMedicalRecipt(String id, String time) {
-		HashMap<String, String> map = new HashMap<>();
-		map.put("id", id);
-		map.put("time", time);
-		return new Gson().toJson(service.get_medical_receiptlist(map));
-	}
+	/*
+	 * @RequestMapping(value = "/getmedicalreceipt.ap", produces =
+	 * "text/html; charset=UTF-8") public String getMedicalRecipt(String id, String
+	 * time) { HashMap<String, String> map = new HashMap<>(); map.put("id", id);
+	 * map.put("time", time); return new
+	 * Gson().toJson(service.get_medical_receiptlist(map)); }
+	 */
 }

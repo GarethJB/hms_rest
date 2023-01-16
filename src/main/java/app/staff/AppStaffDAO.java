@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.google.gson.JsonElement;
 
-import app.staff.vo.MedicalReceiptVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.StaffVO;
 
@@ -41,9 +40,9 @@ public class AppStaffDAO implements AppStaffService {
 		return sql.update("staff.update_patient_memo", map);
 	}
 
-	@Override
-	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
-		return sql.selectList("staff.get_medical_receipt", map);
-	}
+//	@Override
+//	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
+//		return sql.selectList("staff.get_medical_receipt", map);
+//	}
 
 }

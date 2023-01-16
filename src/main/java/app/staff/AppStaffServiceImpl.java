@@ -35,10 +35,10 @@ public class AppStaffServiceImpl implements AppStaffService {
 		return dao.update_patient_memo(map);
 	}
 
-	@Override
-	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
-		return dao.get_medical_receiptlist(map);
-	}
-	
+//	@Override
+//	public List<MedicalReceiptVO> get_medical_receiptlist(Map<String, String> map) {
+//		return dao.get_medical_receiptlist(map);
+//	}
+//	
 
 }

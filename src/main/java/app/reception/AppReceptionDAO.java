@@ -1,6 +1,7 @@
 package app.reception;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import app.reception.vo.WardVO;
 import app.reception.vo.MedicalReceiptVO;
+import app.reception.vo.MedicalRecordVO;
+import app.reception.vo.PrescriptionVO;
 import app.staff.vo.PatientVO;
 import app.staff.vo.StaffVO;
 
@@ -26,13 +30,60 @@ public class AppReceptionDAO implements AppReceptionService {
 	}
 
 	@Override
-	public PatientVO search_patient(String name) {
-		return sql.selectOne("re.patient", name);
+	public List<PatientVO> search_patient(String name) {
+		return sql.selectList("re.patient", name);
 	}
 
 	@Override
-	public List<MedicalReceiptVO> search_appointment(String time) {
-		return sql.selectList("re.appointment", time);
+	public List<MedicalReceiptVO> search_appointment(Map<String, String> map) {
+		return sql.selectList("re.appointment", map);
 	}
+
+	@Override
+	public List<MedicalReceiptVO> search_patient_appointment(int id) {
+		
+		return sql.selectList("re.patient_appointment", id);
+	}
+
+	@Override
+	public List<MedicalRecordVO> search_medical_record(Map<String, String> map) {
+	
+		return sql.selectList("re.medical_record",map);
+	}
+
+	@Override
+	public List<PrescriptionVO> search_prescription(int id) {
+
+		return sql.selectList("re.prescription", id);
+	}
+
+	@Override
+	public List<PatientVO> search_patient_id(int id) {
+		// TODO Auto-generated method stub
+		return sql.selectList("re.id", id);
+	}
+
+	@Override
+	public List<WardVO> search_ward(int id) {
+		// TODO Auto-generated method stub
+		return sql.selectList("re.medical_record", id);
+	}
+
+		
+
+	@Override
+	public List<MedicalRecordVO> search_appointment_department(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sql.selectList("re.department", map);
+	}
+
+	@Override
+	public List<MedicalRecordVO> search_medical_record1(String id) {
+		// TODO Auto-generated method stub
+		return sql.selectList("re.meidcal_record_id", id);
+	}
+
+
+
 
 }
