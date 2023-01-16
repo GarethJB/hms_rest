@@ -34,5 +34,6 @@ public interface AppStaffService {
 	public int insert_schedule(Map<String, String> map);
 	public int delete_schedule(Map<String, String> map);
 	public int update_schedule(Map<String, String> map);
+	public int update_schedule_complete(Map<String, String> map);
 
 }

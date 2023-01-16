@@ -163,5 +163,13 @@ public class AppStaffController {
 		return String.valueOf(service.update_schedule(map));
 	}
 	
+	@RequestMapping(value = "/updateScheduleComplete.ap", produces = "text/html; charset=UTF-8")
+	public String updateScheduleComplete(String id, String complete) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("complete", complete);
+		return String.valueOf(service.update_schedule_complete(map));
+	}
+	
 	
 }

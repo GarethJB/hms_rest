@@ -120,5 +120,10 @@ public class AppStaffServiceImpl implements AppStaffService {
 		return dao.update_schedule(map);
 	}
 
+	@Override
+	public int update_schedule_complete(Map<String, String> map) {
+		return dao.update_schedule_complete(map);
+	}
+
 
 }

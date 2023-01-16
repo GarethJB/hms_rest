@@ -126,5 +126,10 @@ public class AppStaffDAO implements AppStaffService {
 		return sql.update("staff.update_schedule", map);
 	}
 
+	@Override
+	public int update_schedule_complete(Map<String, String> map) {
+		return sql.update("staff.update_schedule_complete", map);
+	}
+
 
 }

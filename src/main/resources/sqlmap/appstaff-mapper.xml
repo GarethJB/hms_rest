@@ -163,4 +163,7 @@
 			</when>
 		</choose>
 	</update>
+	<update id="update_schedule_complete">
+		update nurse_schedule set complete = #{complete} where schedule_id = #{id} 
+	</update>
 </mapper>
