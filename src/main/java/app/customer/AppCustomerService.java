@@ -9,14 +9,15 @@ import app.customer.vo.CustomerVO;
 import app.customer.vo.MedicalReceiptVO;
 import app.customer.vo.MedicalRecordVO;
 import app.customer.vo.ReceiptVO;
-import app.staff.vo.StaffVO;
+import app.customer.vo.StaffSearchVO;
 
 public interface AppCustomerService {
 	
 	public CustomerVO login_customer(Map<String, String> map);		//일반 로그인
 	public CustomerVO check_customer(Map<String, String> map);		//신원정보 확인
 	public AccountVO check_email(String email);						//이메일 중복확인
-	public void insert_patient(Map<String, String> map);			//환자등록
+	public void insert_patient(Map<String, Object> map);			//환자등록
+	public void update_additional(Map<String, Object> map);			//세부정보 등록
 	public void join_customer(Map<String, String> map);				//회원가입
 	
 	public CustomerVO info_patient(int patient_id);					//고객정보 조회
@@ -30,8 +31,8 @@ public interface AppCustomerService {
 	
 	public List<MedicalReceiptVO> list_numberticket(int today);		//모바일번호표 조회
 	
-	public List<StaffVO> search_by_name (String searchWord);		//의료진으로 검색
-	public List<StaffVO> search_by_department (String searchWord);	//진료과로 검색
+	public List<StaffSearchVO> search_by_name (String searchWord);		//의료진으로 검색
+	public List<StaffSearchVO> search_by_department (String searchWord);	//진료과로 검색
 	
 	
 	public void insert_receipt(MedicalReceiptVO vo);				//진료예약

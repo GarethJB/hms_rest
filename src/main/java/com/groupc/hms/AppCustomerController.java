@@ -49,8 +49,8 @@ public class AppCustomerController {
 	
 	//환자등록
 	@RequestMapping(value = "/patient_insert.cu", produces = "text/html; charset=UTF-8")
-	public void patientInsert(String social_id, String name, String gender, String phone_number) {
-		HashMap<String, String> map = new HashMap<>();
+	public void patientInsert(int social_id, String name, String gender, String phone_number) {
+		HashMap<String, Object> map = new HashMap<>();
 		
 		map.put("social_id", social_id);
 		map.put("name", name);

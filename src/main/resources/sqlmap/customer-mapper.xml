@@ -60,11 +60,13 @@
 	
 	<!-- 진료이력 조회 -->
 	<select id="medical_list" resultType="app.customer.vo.MedicalRecordVO">
-		SELECT m.*, s.name, s.department_id, d.department_name
+		SELECT m.*, s.name staff_name, s.department_id, d.department_name, p.prescription_record_id, p.prescription_name, t.name patient_name
 		FROM medical_record m 
 		INNER JOIN staff s ON m.staff_id = s.staff_id 
 		INNER JOIN department d ON s.department_id = d.department_id
-		WHERE patient_id = #{patient_id}
+		INNER JOIN prescription_record p ON m.medical_record_id = p.medical_record_id
+		INNER JOIN patient t ON m.patient_id = t.patient_id
+		WHERE m.patient_id = #{patient_id}
 	</select>
 	
 	<!-- 입원이력 조회 -->
@@ -112,18 +114,20 @@
 	</select>
 	
 	<!-- 의료진으로 검색 -->
-	<select id="search_by_name" resultType="app.staff.vo.StaffVO">
+	<select id="search_by_name" resultType="app.customer.vo.StaffSearchVO">
 		SELECT *
 		FROM staff
 		WHERE name LIKE '%'||#{searchWord}||'%' OR introduction Like '%'||#{searchWord}||'%'
+		AND staff_level = 1
 	</select>
 	
 	<!-- 진료과로 검색 -->
-	<select id="search_by_department" resultType="app.staff.vo.StaffVO">
+	<select id="search_by_department" resultType="app.customer.vo.StaffSearchVO">
 		SELECT s.*, d.department_name
 		FROM staff s
 		INNER JOIN department d ON s.department_id = d.department_id
 		WHERE d.department_name LIKE '%'||#{searchWord}||'%'
+		AND staff_level = 1
 	</select>
 	
 	<!-- 모바일 번호표 -->

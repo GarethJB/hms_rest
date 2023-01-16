@@ -12,7 +12,7 @@ import app.customer.vo.CustomerVO;
 import app.customer.vo.MedicalReceiptVO;
 import app.customer.vo.MedicalRecordVO;
 import app.customer.vo.ReceiptVO;
-import app.staff.vo.StaffVO;
+import app.customer.vo.StaffSearchVO;
 
 @Service
 public class AppCustomerServiceImpl implements AppCustomerService {
@@ -39,8 +39,15 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	
 	//환자등록
 	@Override
-	public void insert_patient(Map<String, String> map) {
+	public void insert_patient(Map<String, Object> map) {
 		dao.insert_patient(map);
+	}
+	
+	//세부정보 등록
+	@Override
+	public void update_additional(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	//회원가입
@@ -113,13 +120,13 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	
 	//의료진으로 검색
 	@Override
-	public List<StaffVO> search_by_name(String searchWord) {
+	public List<StaffSearchVO> search_by_name(String searchWord) {
 		return dao.search_by_name(searchWord);
 	}
 	
 	//진료과로 검색
 	@Override
-	public List<StaffVO> search_by_department(String searchWord) {
+	public List<StaffSearchVO> search_by_department(String searchWord) {
 		return dao.search_by_department(searchWord);
 	}
 	
@@ -128,6 +135,8 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	public List<MedicalReceiptVO> list_numberticket(int today) {
 		return dao.list_numberticket(today);
 	}
+
+
 
 
 
