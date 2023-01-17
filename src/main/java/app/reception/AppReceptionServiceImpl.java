@@ -30,7 +30,6 @@ public class AppReceptionServiceImpl implements AppReceptionService {
 			return dao.search_patient(name);
 	}
 
-	@Override
 	public List<MedicalReceiptVO> search_appointment(Map<String, String> map) {		
 		return dao.search_appointment(map);
 	}
@@ -59,7 +58,6 @@ public class AppReceptionServiceImpl implements AppReceptionService {
 		return dao.search_patient_id(id);
 	}
 
-	@Override
 	public List<WardVO> search_ward(int id) {
 		// TODO Auto-generated method stub
 		return dao.search_ward(id);
@@ -74,9 +72,15 @@ public class AppReceptionServiceImpl implements AppReceptionService {
 	}
 
 	@Override
-	public List<MedicalRecordVO> search_medical_record1(String id) {
+	public List<MedicalRecordVO> search_medical_record1(int id) {
 		// TODO Auto-generated method stub
 		return dao.search_medical_record1(id);
+	}
+
+	@Override
+	public List<WardVO> search_Ward(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

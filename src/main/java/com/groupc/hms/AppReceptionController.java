@@ -51,14 +51,14 @@ public class AppReceptionController {
 
 	  //진료기록 조회 by id
 	  @RequestMapping(value ="/medical_record_id.re", produces="text/html;charset=utf-8") 
-	  public String search_medicalrecord(String id ) {
+	  public String search_medicalrecord(int id) {
 	  List<MedicalRecordVO> recordlist = service.search_medical_record1(id);
 	 
 	  return new Gson().toJson( recordlist); 
 	  }
 	 
 
-	  //진료기록 조회 by map
+	  //상세 진료기록 조회 by map
 	  @RequestMapping(value ="/medical_record.re", produces="text/html;charset=utf-8") 
 	  public String search_medicalrecord(String id,
 	  String from, String to) { HashMap<String, String> map = new HashMap<>();
@@ -70,18 +70,17 @@ public class AppReceptionController {
 	 
 	
 	
-	
 	//환자예약정보 조회
 	@RequestMapping(value ="/appointment.re", produces ="text/html;charset=utf-8")
-	public String search_patient_appointment(int id ) {
+	public String search_patient_appointment(int id) {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
 		List<MedicalReceiptVO> appointmentlist = service.search_patient_appointment(id);
 		return gson.toJson( appointmentlist);		
 	}
 	
-	//환자인적사항 조회(by id )
+	//환자인적사항 조회(by social_id )
 		@RequestMapping(value ="/id.re", produces ="text/html;charset=utf-8")
-		public String search_patient(int id) {
+		public String search_patient_id(int id) {
 			List<PatientVO> list = service.search_patient_id(id);
 			return new Gson().toJson(list);
 		}
