@@ -64,7 +64,7 @@ public class AppReceptionDAO implements AppReceptionService {
 
 	public List<WardVO> search_ward(int id) {
 		// TODO Auto-generated method stub
-		return sql.selectList("re.medical_record", id);
+		return sql.selectList("re.ward", id);
 	}
 
 		
@@ -76,7 +76,7 @@ public class AppReceptionDAO implements AppReceptionService {
 	}
 
 	@Override
-	public List<MedicalRecordVO> search_medical_record1(int id) {
+	public List<MedicalRecordVO> search_medical_record_id(int id) {
 		// TODO Auto-generated method stub
 		return sql.selectList("re.meidcal_record_id", id);
 	}

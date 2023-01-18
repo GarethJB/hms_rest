@@ -18,7 +18,7 @@ public interface AppReceptionService {
 	
 	public List<MedicalReceiptVO> search_patient_appointment(int id); //예약정보 검색
 	public List<MedicalRecordVO> search_medical_record(Map<String, String> map);//진료이력조회 by map
-	public List<MedicalRecordVO> search_medical_record1(int id);			//진료이력조회 
+	public List<MedicalRecordVO> search_medical_record_id(int id);			//진료이력조회 
 	public List<PrescriptionVO> search_prescription(int id);				 //처방정보조회
 	public List<WardVO> search_Ward(int id); 							//입원 내역 조회
 	

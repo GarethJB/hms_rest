@@ -24,11 +24,11 @@ public class AppReceptionController {
 	
 	//전체예약리스트
 	@RequestMapping(value ="/apointmentList.re", produces ="text/html;charset=utf-8")
-	public String search_admission(String time, String id) {
+	public String search_admission(String time, String department,String doctor) {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("time", time);
-		map.put("id", id);
-		
+		map.put("department", department);
+		map.put("doctor", doctor);		
 		return new Gson().toJson(service.search_appointment(map));
 	}
 	
@@ -40,19 +40,19 @@ public class AppReceptionController {
 		return new Gson().toJson(wardlist);
 	}
 	
-	/*
-	 * //처방기록 조회
-	 * 
-	 * @RequestMapping(value ="/prescription.re", produces
-	 * ="text/html;charset=utf-8") public String search_prescription(int id) {
-	 * List<PrescriptionVO> presList = service.search_prescription(id); return new
-	 * Gson().toJson( presList); }
-	 */
+	
+	  //처방기록 조회  
+	  @RequestMapping(value ="/prescription.re", produces="text/html;charset=utf-8") 
+	  public String search_prescription(int id) {
+	  List<PrescriptionVO> presList = service.search_prescription(id); 
+	  return new Gson().toJson( presList); 
+	  }
+	
 
 	  //진료기록 조회 by id
 	  @RequestMapping(value ="/medical_record_id.re", produces="text/html;charset=utf-8") 
 	  public String search_medicalrecord(int id) {
-	  List<MedicalRecordVO> recordlist = service.search_medical_record1(id);
+	  List<MedicalRecordVO> recordlist = service.search_medical_record_id(id);
 	 
 	  return new Gson().toJson( recordlist); 
 	  }
@@ -78,7 +78,7 @@ public class AppReceptionController {
 		return gson.toJson( appointmentlist);		
 	}
 	
-	//환자인적사항 조회(by social_id )
+	//환자인적사항 조회(by id )
 		@RequestMapping(value ="/id.re", produces ="text/html;charset=utf-8")
 		public String search_patient_id(int id) {
 			List<PatientVO> list = service.search_patient_id(id);

@@ -16,45 +16,50 @@ on m.staff_id = s.staff_id
 inner join department d
 on s.department_id =d.department_id
 where to_char(m.time, 'yyyy-mm-dd') = #{time} 
-<if test="id != 0">and s.department_id= #{id}</if>
-order by reserve_time
+<if test="department != 0">and s.department_id= #{department}</if>
+and s.name=#{doctor}
+order by reserve_time desc
 </select>
 
 
 <!--입원기록 조회  -->
 <select id='ward' resultType="app.reception.vo.WardVO" >
-select a.admission_date, a.discharge_date, s.name doctor_name, d.department_name, m.patient_id, p.name patient_name
-from admission_record a inner join medical_record m
-on a.medical_record_id = m.medical_record_id
-inner join staff s
-on s.staff_id = m.staff_id
-inner join department d
-on d.department_id = s. department_id
-inner join ward w 
-on w.ward_id= a.ward_id
-inner join patient p
-on m.patient_id = p.patient_id 
-where m.patient_id =#{id}
+select a.*, w.*,p.name patient_name, s.name doctor_name, d.department_name,
+to_char(a.admission_date, 'yyyy-mm-dd')admission_date, to_char(a.admission_date, 'hh24:mi') admission_time, 
+to_char(a.admission_date, 'dy') admission_day,
+to_char(a.discharge_date, 'yyyy-mm-dd')discharge_date, to_char(a.discharge_date, 'hh24:mi') discharge_time,
+to_char(a.discharge_date, 'dy') discharge_day
+from admission_record a left outer join ward w
+on a.ward_id = w.ward_id
+left outer join medical_record m
+on m.medical_record_id = a.medical_record_id
+left outer join patient p
+on p.patient_id = m.patient_id
+left outer join staff s
+on s.staff_id= m.staff_id
+left outer join department d
+on d.department_id =s.department_id
+where p.patient_id =#{id}
+order by  to_char(a.admission_date, 'yyyy-mm-dd') desc
 </select>
 
  <!--처방기록 조회 -->
  <select id='prescription' resultType="app.reception.vo.PrescriptionVO">
- select p.*, to_char(treatment_date, 'yyyy-mm-dd') pres_date, to_char(treatment_date, 'yy-mm-dd') pres_date_short
-,to_char(treatment_date, 'day') treatment_day,to_char(treatment_date, 'dy')treatment_day_short ,
-treatment_name, pt.name patient_name, s.name doctor_name,  d.department_name department_name
-from prescription_record p inner join medical_record m
-on p.medical_record_id = m.medical_record_id
-inner join patient pt
-on m.patient_id = pt.patient_id 
-inner join staff s
-on m.staff_id =s.staff_id
-inner join department d
-on d.department_id= s.department_id
-where p.patient_id=#{id} 
-
+select pr.*,m.*, p.name patient_name, s.name doctor_name,d.department_name department_name,
+to_char(m.treatment_date, 'yyyy-mm-dd')treate_date, to_char(m.treatment_date, 'hh24:mi')time, 
+to_char(m.treatment_date, 'dy')treate_day, m.memo memo
+from prescription_record pr left outer join medical_record m
+on pr.medical_record_id = m.medical_record_id
+left outer join patient p 
+on p.patient_id = m.patient_id
+left outer join staff s
+on s.staff_id = m.staff_id
+left outer join department d
+on d.department_id =s.department_id
+where p.patient_id = #{id}
+order by to_char(m.treatment_date, 'yyyy-mm-dd') desc
  </select>
  
-
 
 <!--환자진료기록 조회 by id-->
 <select id='meidcal_record_id' resultType="app.reception.vo.MedicalRecordVO" >
@@ -97,7 +102,7 @@ order by m.treatment_date desc
 
 <!-- 환자예약정보 조회 -->
 <select id ='patient_appointment'  resultType="app.reception.vo.MedicalReceiptVO" >
-select to_char(m.time, 'yyyy-mm-dd') reserve_date, to_char(m.time, 'hh24:ss') reserve_time,
+select to_char(m.time, 'yyyy-mm-dd') reserve_date, to_char(m.time, 'hh24:ss') reserve_time, d.location location,
 m.memo, p.name patient_name , s.name doctor_name, d.department_name department_name, to_char(m.time,'dy') reserve_day
 from medical_receipt m inner join patient p
 on m.patient_id = p.patient_id

@@ -72,9 +72,9 @@ public class AppReceptionServiceImpl implements AppReceptionService {
 	}
 
 	@Override
-	public List<MedicalRecordVO> search_medical_record1(int id) {
+	public List<MedicalRecordVO> search_medical_record_id(int id) {
 		// TODO Auto-generated method stub
-		return dao.search_medical_record1(id);
+		return dao.search_medical_record_id(id);
 	}
 
 	@Override
