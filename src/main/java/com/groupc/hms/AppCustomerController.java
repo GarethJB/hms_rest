@@ -27,6 +27,13 @@ public class AppCustomerController {
 		return new Gson().toJson(service.login_customer(loginMap));
 	}
 	
+	//소셜 로그인
+	@RequestMapping(value = "/social.cu" , produces = "text/html;charset=utf-8")
+	public String andVo(String email) {
+		
+		return new Gson().toJson(service.login_social(email));
+	}
+	
 	//신원확인
 	@RequestMapping(value = "/customer_check.cu", produces = "text/html; charset=UTF-8")
 	public String SocialIdCheck(String name, String social_id) {
@@ -73,6 +80,9 @@ public class AppCustomerController {
 	}
 	
 
+	
+	
+
 	//환자정보 조회
 	@RequestMapping(value = "/customer_info.cu", produces = "text/html; charset=UTF-8")
 	public String patientInfo(int patient_id) {
@@ -110,10 +120,11 @@ public class AppCustomerController {
 	
 	//예약일정 조회
 	@RequestMapping(value = "/medical_schedule.cu", produces = "text/html; charset=UTF-8")
-	public String medicalSchedule(int staff_id) {
-	//	int aa = sql.selectOne("test");
-		//System.out.println(aa);s
-		return new Gson().toJson(service.schedule_medical(staff_id));
+	public String medicalSchedule(int staff_id, int date) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("staff_id", staff_id);
+		map.put("date", date);
+		return new Gson().toJson(service.schedule_medical(map));
 	}
 	
 	//입원일정 조회
@@ -139,11 +150,12 @@ public class AppCustomerController {
 		return new Gson().toJson(service.search_by_department(searchWord));
 	}
 	
+	
 	//모바일 번호표
 	@RequestMapping(value = "/number_ticket.cu", produces = "text/html; charset=UTF-8")
-	public String NumberTicket(int today) {
+	public String NumberTicket(int patient_id) {
 		
-		return new Gson().toJson(service.list_numberticket(today));
+		return new Gson().toJson(service.list_numberticket(patient_id));
 	}
 	
 	//고객정보 수정

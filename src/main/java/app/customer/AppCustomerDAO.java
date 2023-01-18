@@ -1,5 +1,6 @@
 package app.customer;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,12 @@ public class AppCustomerDAO implements AppCustomerService {
 	@Override
 	public CustomerVO login_customer(Map<String, String> map) {
 		return sql.selectOne("customer.login", map);
+	}
+	
+	//소셜 로그인
+	@Override
+	public CustomerVO login_social(String email) {
+		return sql.selectOne("customer.social_login", email);
 	}
 	
 	//신원정보 확인
@@ -87,8 +94,8 @@ public class AppCustomerDAO implements AppCustomerService {
 	
 	//진료일정 조회
 	@Override
-	public List<MedicalReceiptVO> schedule_medical(int staff_id) {
-		return sql.selectList("customer.medical_schedule", staff_id);
+	public List<MedicalReceiptVO> schedule_medical(HashMap<String, Object> map) {
+		return sql.selectList("customer.medical_schedule", map);
 	}
 	
 	//진료예약 조회
@@ -133,11 +140,16 @@ public class AppCustomerDAO implements AppCustomerService {
 		return sql.selectList("customer.search_by_department", searchWord);
 	}
 	
+
+	
 	//모바일 번호표
 	@Override
-	public List<MedicalReceiptVO> list_numberticket(int today) {
-		return sql.selectList("customer.list_number_ticket", today);
+	public List<MedicalReceiptVO> list_numberticket(int patient_id) {
+		return sql.selectList("customer.list_number_ticket", patient_id);
 	}
+
+
+
 
 
 

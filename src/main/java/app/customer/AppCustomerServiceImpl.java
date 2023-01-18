@@ -1,5 +1,6 @@
 package app.customer;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,13 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	public CustomerVO login_customer(Map<String, String> map) {
 		return dao.login_customer(map);
 	}
+	
+	//소셜로그인
+	@Override
+	public CustomerVO login_social(String email) {
+		return dao.login_social(email);
+	}
+
 	
 	//신원정보 확인
 	@Override
@@ -101,8 +109,8 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	
 	//진료일정 조회
 	@Override
-	public List<MedicalReceiptVO> schedule_medical(int staff_id) {
-		return dao.schedule_medical(staff_id);
+	public List<MedicalReceiptVO> schedule_medical(HashMap<String, Object> map) {
+		return dao.schedule_medical(map);
 	}
 	
 	//진료예약
@@ -130,11 +138,14 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 		return dao.search_by_department(searchWord);
 	}
 	
+
+	
 	//모바일 번호표
 	@Override
-	public List<MedicalReceiptVO> list_numberticket(int today) {
-		return dao.list_numberticket(today);
+	public List<MedicalReceiptVO> list_numberticket(int patient_id) {
+		return dao.list_numberticket(patient_id);
 	}
+
 
 
 
