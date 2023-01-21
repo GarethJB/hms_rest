@@ -79,6 +79,16 @@ public class AppCustomerController {
 		service.join_customer(map);
 	}
 	
+	//기기ID 저장
+	@RequestMapping(value = "/token_update.cu", produces = "text/html; charset=UTF-8")
+	public void deviceUpdate(int patient_id, String token) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("patient_id", patient_id);
+		map.put("token", token);
+		
+		service.device_update(map);
+	}
+	
 
 	
 	

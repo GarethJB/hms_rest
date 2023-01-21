@@ -21,7 +21,8 @@ public interface AppCustomerService {
 	public void insert_patient(Map<String, Object> map);			//환자등록
 	public void update_additional(Map<String, Object> map);			//세부정보 등록
 	public void join_customer(Map<String, String> map);				//회원가입
-	
+	public void device_update(Map<String, Object> map);				//기기ID 저장
+
 	public CustomerVO info_patient(int patient_id);					//고객정보 조회
 	public List<ReceiptVO> info_receipt(int department_id);			//예약정보 조회
 	public List<MedicalRecordVO> list_medical(int patient_id);		//진료이력 조회

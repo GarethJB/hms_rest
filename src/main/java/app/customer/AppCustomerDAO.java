@@ -61,12 +61,19 @@ public class AppCustomerDAO implements AppCustomerService {
 		
 	}
 
-	
 	//회원가입
 	@Override
 	public void join_customer(Map<String, String> map) {
 		sql.insert("customer.customer_join", map);
 	}
+	
+	//기기ID 저장
+	@Override
+	public void device_update(Map<String, Object> map) {
+		sql.update("customer.device_update", map);
+	}
+	
+	
 	
 	//고객정보 조회
 	@Override
@@ -147,6 +154,8 @@ public class AppCustomerDAO implements AppCustomerService {
 	public List<MedicalReceiptVO> list_numberticket(int patient_id) {
 		return sql.selectList("customer.list_number_ticket", patient_id);
 	}
+
+
 
 
 

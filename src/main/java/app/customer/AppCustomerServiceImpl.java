@@ -63,6 +63,13 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	public void join_customer(Map<String, String> map) {
 		dao.join_customer(map);
 	}
+	
+	//기기ID 저장
+	@Override
+	public void device_update(Map<String, Object> map) {
+		dao.device_update(map);
+	}
+
 		
 	
 	//고객정보 조회
@@ -145,6 +152,7 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	public List<MedicalReceiptVO> list_numberticket(int patient_id) {
 		return dao.list_numberticket(patient_id);
 	}
+
 
 
 

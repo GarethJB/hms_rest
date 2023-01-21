@@ -42,8 +42,15 @@
 	<!-- 회원가입 -->
 	<insert id="customer_join">
 		INSERT INTO patient_account(patient_id, email, pw, join_date)
-		VALUES (#{patient_id}, #{email}, #{pw}, sysdate)
+		VALUES (#{patient_id}, #{email}, #{pw}, current_date)
 	</insert>
+	
+	<!-- 기기ID 저장 -->
+	<update id="device_update">
+		UPDATE patient_account
+		SET device_id = #{token}
+		WHERE patient_id = #{patient_id}
+	</update>
 	
 
 	
