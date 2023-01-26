@@ -37,7 +37,7 @@ public interface AppCustomerService {
 	public List<StaffSearchVO> search_by_name (String searchWord);		//의료진으로 검색
 	public List<StaffSearchVO> search_by_department (String searchWord);	//진료과로 검색
 	
-	
+	public void receipt_qr(Map<String, Object> map);				//qr접수
 	public void insert_receipt(MedicalReceiptVO vo);				//진료예약
 	public void delete_receipt(MedicalReceiptVO vo);				//예약취소
 	

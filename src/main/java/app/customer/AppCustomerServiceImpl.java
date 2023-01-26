@@ -152,6 +152,12 @@ public class AppCustomerServiceImpl implements AppCustomerService {
 	public List<MedicalReceiptVO> list_numberticket(int patient_id) {
 		return dao.list_numberticket(patient_id);
 	}
+	
+	//QR 접수
+	@Override
+	public void receipt_qr(Map<String, Object> map) {
+		dao.receipt_qr(map);
+	}
 
 
 

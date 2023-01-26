@@ -165,6 +165,12 @@
 		ORDER BY time
 	</select>
 	
+	<!-- QR접수 -->
+	<insert id="receipt_qr">
+		INSERT INTO medical_receipt (receipt_id, patient_id, staff_id, time)
+		VALUES (seq_receipt_id.NEXTVAL, #{patient_id}, #{staff_id}, current_date)
+	</insert>
+	
 	
 	<!-- 진료예약 -->
 	<insert id="insert_receipt">

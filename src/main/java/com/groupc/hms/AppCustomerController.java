@@ -1,5 +1,7 @@
 package com.groupc.hms;
 
+
+
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,6 +174,16 @@ public class AppCustomerController {
 	@RequestMapping(value = "/info_update.cu", produces = "text/html; charset=UTF-8")
 	public void CustomerInfoUdate(int patient_id) {
 		
+	}
+	
+	//QR접수
+	@RequestMapping(value = "/qr_receipt.cu", produces = "text/html; charset=UTF-8")
+	public void qrReceipt(int patient_id, int staff_id) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("patient_id", patient_id);
+		map.put("staff_id", staff_id);
+		
+		service.receipt_qr(map);
 	}
 	
 	//진료예약
