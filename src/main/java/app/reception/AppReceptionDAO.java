@@ -45,7 +45,7 @@ public class AppReceptionDAO implements AppReceptionService {
 	}
 
 	@Override
-	public List<MedicalRecordVO> search_medical_record(Map<String, String> map) {
+	public List<MedicalRecordVO> search_medical_record(Map<String, Object> map) {
 	
 		return sql.selectList("re.medical_record",map);
 	}
@@ -85,6 +85,18 @@ public class AppReceptionDAO implements AppReceptionService {
 	public List<WardVO> search_Ward(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<MedicalReceiptVO> search_doctor(String doctor) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StaffVO> get_doctor_name(int id) {
+		// TODO Auto-generated method stub
+		return sql.selectList("re.get_doctor_name",id);
 	}
 
 
