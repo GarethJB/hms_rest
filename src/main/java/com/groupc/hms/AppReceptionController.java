@@ -17,21 +17,21 @@ import app.reception.vo.MedicalReceiptVO;
 import app.reception.vo.MedicalRecordVO;
 import app.reception.vo.PrescriptionVO;
 import app.staff.vo.PatientVO;
+import app.staff.vo.StaffVO;
 
 @RestController
 public class AppReceptionController {
 	@Autowired private AppReceptionServiceImpl service;
 	
+	
 	//전체예약리스트
 	@RequestMapping(value ="/apointmentList.re", produces ="text/html;charset=utf-8")
-	public String search_admission(String time, String department,String doctor) {
+	public String search_appointment(String time) {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("time", time);
-		map.put("department", department);
-		map.put("doctor", doctor);		
+
 		return new Gson().toJson(service.search_appointment(map));
 	}
-	
 	
 	//입원기록 조회
 	@RequestMapping(value ="/ward.re", produces ="text/html;charset=utf-8")
@@ -60,8 +60,8 @@ public class AppReceptionController {
 
 	  //상세 진료기록 조회 by map
 	  @RequestMapping(value ="/medical_record.re", produces="text/html;charset=utf-8") 
-	  public String search_medicalrecord(String id,
-	  String from, String to) { HashMap<String, String> map = new HashMap<>();
+	  public String search_medicalrecord(int id,
+	  String from, String to) { HashMap<String, Object> map = new HashMap<>();
 	  map.put("id", id); 
 	  map.put("from", from); 
 	  map.put("to", to);
