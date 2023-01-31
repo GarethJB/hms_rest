@@ -112,7 +112,7 @@
 		INNER JOIN staff s ON m.staff_id = s.staff_id
 		INNER JOIN department d ON s.department_id = d.department_id
 		WHERE m.staff_id = #{staff_id}
-		AND time BETWEEN TO_DATE(#{date}) AND TO_DATE(#{date} + 1)
+		AND time BETWEEN TO_DATE(#{date} - 1) AND TO_DATE(#{date})
 	</select>
 	
 	<!-- 입원일정 조회 -->
