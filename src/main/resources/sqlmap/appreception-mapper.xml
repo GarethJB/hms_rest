@@ -24,7 +24,7 @@ order by reserve_time desc
 select to_char(m.time, 'day')reserve_today,to_char(m.time,'mm/dd')reserve_date_short, 
 to_char(m.time,'hh24:mm')reserve_time, to_char(m.time,'yyyy-mm-dd')time, to_char(m.time, 'yymmddhh24mm') reserve_time_count,
 to_char(current_date, 'yymmddhh24mm') current_time,p.patient_id,
-m.memo, p.name patient_name, s.name doctor_name,
+m.memo, p.name patient_name, s.name doctor_name, s.staff_id,
 d.department_name department_name, d.location location
 from medical_receipt m inner join patient p
 on m.patient_id= p.patient_id
@@ -33,7 +33,9 @@ on m.staff_id = s.staff_id
 inner join department d
 on s.department_id =d.department_id
 where to_char(m.time, 'yyyy-mm-dd') = #{time} 
-
+ <if test="!doctor_name.equals('교수명선택')">
+	 and s.name= #{doctor_name}
+ </if>
 order by reserve_time
 </select>
 

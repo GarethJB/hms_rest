@@ -26,9 +26,10 @@ public class AppReceptionController {
 	
 	//전체예약리스트
 	@RequestMapping(value ="/apointmentList.re", produces ="text/html;charset=utf-8")
-	public String search_appointment(String time) {
+	public String search_appointment(String time, String doctor_name) {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("time", time);
+		map.put("doctor_name", doctor_name);
 
 		return new Gson().toJson(service.search_appointment(map));
 	}
