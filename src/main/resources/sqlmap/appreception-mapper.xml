@@ -21,8 +21,8 @@ order by reserve_time desc
 
 <!--예약리스트 조회 -->
 <select id='appointment' resultType="app.reception.vo.MedicalReceiptVO" >
-select to_char(m.time, 'day')reserve_today,to_char(m.time,'mm/dd')reserve_date_short, 
-to_char(m.time,'hh24:mm')reserve_time, to_char(m.time,'yyyy-mm-dd')time, to_char(m.time, 'yymmddhh24mm') reserve_time_count,
+select to_char(m.time, 'day')reserve_today,to_char(m.time,'mi/dd')reserve_date_short, 
+to_char(m.time,'hh24:mi')reserve_time, to_char(m.time,'yyyy-mm-dd')time, to_char(m.time, 'yymmddhh24mm') reserve_time_count,
 to_char(current_date, 'yymmddhh24mm') current_time,p.patient_id,
 m.memo, p.name patient_name, s.name doctor_name, s.staff_id,
 d.department_name department_name, d.location location
@@ -42,7 +42,7 @@ order by reserve_time
 <!--예약리스트 조회 -->
 <select id='appointment_name' resultType="app.reception.vo.MedicalReceiptVO" >
 select to_char(m.time, 'day')reserve_today,to_char(m.time,'mm/dd')reserve_date_short, 
-to_char(m.time,'hh24:mm')reserve_time, to_char(m.time,'yyyy-mm-dd')time, to_char(m.time, 'yymmddhh24mm') reserve_time_count,
+to_char(m.time,'hh24:mi')reserve_time, to_char(m.time,'yyyy-mm-dd')time, to_char(m.time, 'yymmddhh24mi') reserve_time_count,
 to_char(current_date, 'yymmddhh24mm') current_time,p.patient_id,
 m.memo, p.name patient_name, s.name doctor_name,
 d.department_name department_name, d.location location
@@ -159,7 +159,7 @@ order by name
 </select>
 <!-- 환자예약정보 조회 -->
 <select id ='patient_appointment'  resultType="app.reception.vo.MedicalReceiptVO" >
-select to_char(m.time, 'yyyy-mm-dd') reserve_date, to_char(m.time, 'hh24:ss') reserve_time, d.location location,
+select to_char(m.time, 'yyyy-mm-dd') reserve_date, to_char(m.time, 'hh24:mi') reserve_time, d.location location,
 m.memo, p.name patient_name , s.name doctor_name, d.department_name department_name, to_char(m.time,'dy') reserve_day
 from medical_receipt m inner join patient p
 on m.patient_id = p.patient_id
